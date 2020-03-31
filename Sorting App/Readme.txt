@@ -9,17 +9,15 @@ echo "deb https://download.mono-project.com/repo/ubuntu vs-bionic main" | sudo t
 sudo apt update
 sudo apt install mono-complete
 
+I used Ubuntu on windows,
+first open ubuntu cmd
 
-Make sure the directory in the Ubuntu consle is set to the Ubuntu folder.
-For example my directiery was.
+Find the files directory and then set ubuntu to that directory by typing,
 
-cd /mnt/c/Desktop/Program/Ubuntu
+cd /mnt/c/"Files directory"
 
-I placed my file on the desktop in windows so just set this to where ever you directory for the Program.exe file is.
+Then run the program by typing,
 
-The Program should alrady be compiled but if it needs to be recompiled you can use
-mcs -out:Program.exe Program.cs
-
-Then to run the program type
 mono Program.exe
+
 

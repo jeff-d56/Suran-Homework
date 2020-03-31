@@ -5,7 +5,7 @@ using System.IO;
 // Jeff Davidson CSC 499
 // Program to take names from a file and sort the names in ascending order by the length of the name, then alphabetically.
 
-namespace Suran_Homework_1
+namespace Suran_Homework
 {
     class Program
     {
@@ -13,7 +13,7 @@ namespace Suran_Homework_1
         public static string[] ReadFromFile(string filePath)
         {
             List<string> list = new List<string>(); // Create list to add easily to.
-            
+
             using (StreamReader sr = File.OpenText(filePath))
             {
                 string name;
@@ -41,7 +41,7 @@ namespace Suran_Homework_1
                 name = char.ToUpper(name[0]) + name.Substring(1);
 
             }
-            
+
             return name; // Return the cleaned name.
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ namespace Suran_Homework_1
                     }
 
                     // Check if the next name in array is the same length as current name to only sort alphabetically by the same length name.
-                    if (nameArray[j].Length == nameArray[j + 1].Length) 
+                    if (nameArray[j].Length == nameArray[j + 1].Length)
                     {
 
                         if (nameArray[j].CompareTo(nameArray[j + 1]) > 0) // Sort alphabetically.
@@ -72,7 +72,7 @@ namespace Suran_Homework_1
                             nameArray[j + 1] = temp;
                         }
                     }
-                    
+
                 }
             }
 
@@ -99,20 +99,23 @@ namespace Suran_Homework_1
                 if (nameArray[i] != expectedOutput[i])
                 {
                     // If this name in name array dosent equal the same name in expected output, then they are not the same.
-                    notSame = true; 
+                    notSame = true;
                 }
             }
             if (notSame)
             {
                 Console.WriteLine("Output is not what is expected."); // Tell user output is not what is expeted from homework.
+				Console.WriteLine("");
             }
             else
             {
                 Console.WriteLine("Output is what is expected from homework.");
+				Console.WriteLine("");
             }
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
+        
         static void Main(string[] args)
         {
             // Expected output from homework page.
@@ -127,26 +130,48 @@ namespace Suran_Homework_1
                                        "Reynolds","Sullivan","Williams","Clevenger","Fitzjerrell",
                                        "Hendrickson"};
 
-            string filePath = @"Sort Me.txt"; // File path.
+            string path = @"Sort Me.txt"; // Find User Desktop
 
-            if (File.Exists(filePath)){ // Check if file path is correct.
+            
+            if (File.Exists(path))
+            { // Check if file path is correct.
 
-                string[] nameArray = ReadFromFile(filePath); // Get names from file.
+                string[] nameArray = ReadFromFile(path); // Get names from file.
 
-                Console.WriteLine("-------------- Unsorted names from file --------------");
+                Console.WriteLine("-------------- Unsorted Names From File --------------");
                 PrintArray(nameArray); // Print unsorted names from file.
 
                 nameArray = SortArrayOfNames(nameArray); // Sort names from file in ascending order by the length of the name, then alphabetically.
-                Console.WriteLine("-------------- Sorted names --------------");
+                Console.WriteLine("-------------- Sorted Names From Program --------------");
                 PrintArray(nameArray); // Print sorted array.
 
+                Console.WriteLine("- Check If Program Names Match HomeWork1");
                 CheckOutput(nameArray, expectedOutput); // Check if sorted array equals the expected output from homework page.
+					
+                // Get Second File in same location as first file save it to an array and then compare it to the sorted array.
+                string[] sortedNameArray;
+                path = @"Sorted Text.txt"; // Find User Desktop
+                if (File.Exists(path))
+                {
+                    sortedNameArray = ReadFromFile(path);
+                    Console.WriteLine("-------------- Sorted Names From HomeWork2 --------------");
+                    PrintArray(sortedNameArray);
+
+                    Console.WriteLine("- Check If Program Names Match HomeWork2");
+                    CheckOutput(nameArray, sortedNameArray); // Check if sorted array equals the expected output from homework page.
+                }
+                else
+                {
+                    Console.WriteLine("Can't find Sorted Text.txt at: " + path); // Tell user path is incorrect
+                }
+
+                
             }
             else
             {
-                Console.WriteLine("Can't find file at: " + filePath); // Tell user path is incorrect
+                Console.WriteLine("Can't find Sort Me.txt at: " + path); // Tell user path is incorrect
             }
-            
+
         }
     }
 }
