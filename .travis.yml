@@ -1,4 +1,4 @@
 language: csharp
 script:
-  - cd Sorting_App
+  - cd 'Sorting App'
   - Program.cs
