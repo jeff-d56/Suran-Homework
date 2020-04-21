@@ -1,4 +1,4 @@
 language: csharp
 script:
   - cd 'Sorting App'
-  - Program.exe
+  - mono Program.exe
